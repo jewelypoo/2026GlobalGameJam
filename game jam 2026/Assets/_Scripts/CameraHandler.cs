@@ -22,22 +22,25 @@ public class CameraHandler : MonoBehaviour
     private string interactKeybindText;
     private TagHandle interactableTagHandle;
     private IInteractable lastHitInteractable;
-    private int
-        InteractableLayerMask;
+    private int maskLayer, nonMaskLayer;
+    private PlayerController playerController;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = false;
-        InteractableLayerMask = LayerMask.GetMask("Interactable");
+        playerController = FindFirstObjectByType<PlayerController>();
+        maskLayer = LayerMask.GetMask("Mask Object");
+        nonMaskLayer = LayerMask.GetMask("Nonmask Object");
+        DisableMaskView();
         if (TryGetComponent<PlayerInput>(out PlayerInput inputSystem))
         {
             string keybind = inputSystem.currentActionMap.FindAction("Interact").GetBindingDisplayString(0);
             interactKeybindText = " (" + keybind + ")";
+            print("find input system yay");
         }
         else
         {
+            Debug.LogError("CANT FIND INPUT SYSTEM ON CAMERA HANDLER");
             interactKeybindText = " (E)";
         }
         interactableTagHandle = TagHandle.GetExistingTag("Interactable");
@@ -48,6 +51,21 @@ public class CameraHandler : MonoBehaviour
         CheckForInteractables();
     }
 
+    /// <summary>
+    /// shows objects that can only be seen with mask
+    /// </summary>
+    public void EnableMaskView()
+    {
+        mainCamera.cullingMask = ~nonMaskLayer;
+    }
+
+    /// <summary>
+    /// shows objects that can be seen without mask
+    /// </summary>
+    public void DisableMaskView()
+    {
+        mainCamera.cullingMask = ~maskLayer;
+    }
 
     private void ShowHitCursor()
     {
@@ -82,16 +100,15 @@ public class CameraHandler : MonoBehaviour
 
         ShowHitCursor();
     }
-    
+
     public void OnInteractFired(CallbackContext state)
     {
-        print("yo");
         if (lastHitInteractable == null) return;
-        print("trying interact");
+        if (playerController.isMovementEnabled == false) return;
         if (state.performed)
         {
             lastHitInteractable.OnInteract();
-            print("fired");
+            
         }
     }
 }

@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
     
     private CharacterController controller;
     private UI_Manager uiManager;
+    private CameraHandler cameraHandler;
 
     [Header("Movement Settings")]
     [SerializeField]
@@ -20,6 +21,18 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 inputAxis;
     private float verticalVelocity;
+    private BasePuzzleObject currentPuzzleObject;
+
+    public bool maskActive = false;
+
+    public bool isMovementEnabled
+    {
+        get { return controller.enabled; }
+    }
+    public bool isInteractingWithPuzzle
+    {
+        get { return currentPuzzleObject != null; }
+    }
 
     void Start()
     {
@@ -28,12 +41,35 @@ public class PlayerController : MonoBehaviour
             Debug.LogError("CharacterController component not found on the player object.");
         }
         uiManager = FindFirstObjectByType<UI_Manager>();
-        
+        cameraHandler = FindAnyObjectByType<CameraHandler>();
+
+        ResumePlayerMovement();
     }
 
-    private void Update()
+    public void StopPlayerMovement()
     {
-        HandleMovement();
+        controller.enabled = false;
+        uiManager.ShowMouse();
+    }
+
+    public void ResumePlayerMovement()
+    {
+        controller.enabled = true;
+        uiManager.HideMouse();
+    }
+
+    public void SetCurrentPuzzle(BasePuzzleObject puzzleObject)
+    {
+        currentPuzzleObject = puzzleObject;
+        StopPlayerMovement();
+    }
+    public void StopCurrentPuzzle()
+    {
+        if (currentPuzzleObject != null)
+        {
+            currentPuzzleObject = null;
+        }
+        ResumePlayerMovement();
     }
 
     /// <summary>
@@ -41,6 +77,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void HandleMovement()
     {
+        if (isMovementEnabled == false) return;
         float forwardInput = inputAxis.y;
         float rightInput = inputAxis.x;
 
@@ -52,6 +89,11 @@ public class PlayerController : MonoBehaviour
         move.y = VerticalForceCalculation();
 
         controller.Move(move * Time.deltaTime);
+    }
+
+    private void Update()
+    {
+        HandleMovement();
     }
 
     /// <summary>
@@ -86,6 +128,20 @@ public class PlayerController : MonoBehaviour
         {
             print("you pressed the mask button");
             uiManager.ToggleMask();
+        }
+    }
+
+    public void ExitPuzzle()
+    {
+        if (currentPuzzleObject == null) return;
+        currentPuzzleObject.StopUsing();
+    }
+
+    public void QuitPuzzle(CallbackContext state)
+    {
+        if (state.performed)
+        {
+            ExitPuzzle();
         }
     }
 }

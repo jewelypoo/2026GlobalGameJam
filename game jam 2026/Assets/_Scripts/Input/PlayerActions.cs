@@ -118,6 +118,15 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""QuitPuzzle"",
+                    ""type"": ""Button"",
+                    ""id"": ""e12b924a-2a43-48b6-9279-fb0644caeace"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -252,6 +261,17 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8fd0ecf3-fec8-47fd-abbf-3f098a3a28c8"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""QuitPuzzle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -263,6 +283,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         m_PlayerControls_Move = m_PlayerControls.FindAction("Move", throwIfNotFound: true);
         m_PlayerControls_Mask = m_PlayerControls.FindAction("Mask", throwIfNotFound: true);
         m_PlayerControls_Interact = m_PlayerControls.FindAction("Interact", throwIfNotFound: true);
+        m_PlayerControls_QuitPuzzle = m_PlayerControls.FindAction("QuitPuzzle", throwIfNotFound: true);
     }
 
     ~@PlayerActions()
@@ -346,6 +367,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerControls_Move;
     private readonly InputAction m_PlayerControls_Mask;
     private readonly InputAction m_PlayerControls_Interact;
+    private readonly InputAction m_PlayerControls_QuitPuzzle;
     /// <summary>
     /// Provides access to input actions defined in input action map "PlayerControls".
     /// </summary>
@@ -369,6 +391,10 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "PlayerControls/Interact".
         /// </summary>
         public InputAction @Interact => m_Wrapper.m_PlayerControls_Interact;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerControls/QuitPuzzle".
+        /// </summary>
+        public InputAction @QuitPuzzle => m_Wrapper.m_PlayerControls_QuitPuzzle;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -404,6 +430,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @QuitPuzzle.started += instance.OnQuitPuzzle;
+            @QuitPuzzle.performed += instance.OnQuitPuzzle;
+            @QuitPuzzle.canceled += instance.OnQuitPuzzle;
         }
 
         /// <summary>
@@ -424,6 +453,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @QuitPuzzle.started -= instance.OnQuitPuzzle;
+            @QuitPuzzle.performed -= instance.OnQuitPuzzle;
+            @QuitPuzzle.canceled -= instance.OnQuitPuzzle;
         }
 
         /// <summary>
@@ -485,5 +517,12 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnInteract(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "QuitPuzzle" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnQuitPuzzle(InputAction.CallbackContext context);
     }
 }
