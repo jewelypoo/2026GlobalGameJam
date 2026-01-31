@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
 
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private Camera mainCamera;
+    [SerializeField] private Image blackBackground;
 
     void Start()
     {
@@ -27,6 +29,14 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Update()
+    {
+        HandleMovement();
+    }
+
+    /// <summary>
+    /// handles movement for player
+    /// </summary>
+    private void HandleMovement()
     {
         float forwardInput = inputAxis.y;
         float rightInput = inputAxis.x;
@@ -41,6 +51,10 @@ public class PlayerController : MonoBehaviour
         controller.Move(move * Time.deltaTime);
     }
 
+    /// <summary>
+    /// for gravity calculation
+    /// </summary>
+    /// <returns></returns>
     private float VerticalForceCalculation()
     {
         if (controller.isGrounded)
@@ -54,6 +68,10 @@ public class PlayerController : MonoBehaviour
         return verticalVelocity;
     }
 
+    /// <summary>
+    /// updates movement input axis
+    /// </summary>
+    /// <param name="state"></param>
     public void Move(CallbackContext state)
     {
         inputAxis = state.ReadValue<Vector2>();
