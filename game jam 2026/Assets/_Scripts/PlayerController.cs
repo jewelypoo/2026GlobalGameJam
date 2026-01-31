@@ -1,6 +1,4 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
 
 public class PlayerController : MonoBehaviour
@@ -8,6 +6,7 @@ public class PlayerController : MonoBehaviour
     
     private CharacterController controller;
     private UI_Manager uiManager;
+    private CameraHandler cameraHandler;
 
     [Header("Movement Settings")]
     [SerializeField]
@@ -20,12 +19,20 @@ public class PlayerController : MonoBehaviour
     [Header("References")]
     [SerializeField] private Camera mainCamera;
 
-    private bool
-        debounce = false;
     private Vector2 inputAxis;
     private float verticalVelocity;
-    private string interactKeybindText;
-    private TagHandle interactableTagHandle;
+    private BasePuzzleObject currentPuzzleObject;
+
+    public bool maskActive = false;
+
+    public bool isMovementEnabled
+    {
+        get { return controller.enabled; }
+    }
+    public bool isInteractingWithPuzzle
+    {
+        get { return currentPuzzleObject != null; }
+    }
 
     void Start()
     {
@@ -34,53 +41,43 @@ public class PlayerController : MonoBehaviour
             Debug.LogError("CharacterController component not found on the player object.");
         }
         uiManager = FindFirstObjectByType<UI_Manager>();
-        if (TryGetComponent<PlayerInput>(out PlayerInput inputSystem))
-        {
-            string keybind = inputSystem.currentActionMap.FindAction("Interact").GetBindingDisplayString(0);
-            interactKeybindText = " (" + keybind + ")";
-        }
-        else
-        {
-            interactKeybindText = " (E)";
-        }
-        interactableTagHandle = TagHandle.GetExistingTag("Interactable");
+        cameraHandler = FindAnyObjectByType<CameraHandler>();
+
+        ResumePlayerMovement();
     }
 
-    private void Update()
+    public void StopPlayerMovement()
     {
-        HandleMovement();
-        //CheckForInteractables();
+        controller.enabled = false;
+        uiManager.ShowMouse();
     }
 
-    /*
-    private void CheckForInteractables()
+    public void ResumePlayerMovement()
     {
-        RaycastHit hit;
-        Vector3 origin = mainCamera.transform.position;
-        Vector3 direction = mainCamera.transform.forward;
-
-        //Debug.DrawRay(origin, direction * interactDistance, isHit ? Color.green : Color.red, 0.1f);
-
-        if (!Physics.Raycast(origin, direction, out hit, interactDistance, InteractableLayerMask) ||
-            !hit.collider.gameObject.CompareTag(interactableTagHandle) ||
-            !hit.collider.gameObject.TryGetComponent<IInteractable>(out IInteractable thisInteractable))
-        {
-            ResetCursorInformation();
-            return;
-        }
-
-        lastHitInteractable = thisInteractable;
-
-        interactText.text = lastHitInteractable.IsUsable() ? hit.collider.gameObject.name + keybindText : hit.collider.gameObject.name;
-
-        ShowHitCursor();
+        controller.enabled = true;
+        uiManager.HideMouse();
     }
-    */
+
+    public void SetCurrentPuzzle(BasePuzzleObject puzzleObject)
+    {
+        currentPuzzleObject = puzzleObject;
+        StopPlayerMovement();
+    }
+    public void StopCurrentPuzzle()
+    {
+        if (currentPuzzleObject != null)
+        {
+            currentPuzzleObject = null;
+        }
+        ResumePlayerMovement();
+    }
+
     /// <summary>
     /// handles movement for player
     /// </summary>
     private void HandleMovement()
     {
+        if (isMovementEnabled == false) return;
         float forwardInput = inputAxis.y;
         float rightInput = inputAxis.x;
 
@@ -92,6 +89,11 @@ public class PlayerController : MonoBehaviour
         move.y = VerticalForceCalculation();
 
         controller.Move(move * Time.deltaTime);
+    }
+
+    private void Update()
+    {
+        HandleMovement();
     }
 
     /// <summary>
@@ -126,6 +128,20 @@ public class PlayerController : MonoBehaviour
         {
             print("you pressed the mask button");
             uiManager.ToggleMask();
+        }
+    }
+
+    public void ExitPuzzle()
+    {
+        if (currentPuzzleObject == null) return;
+        currentPuzzleObject.StopUsing();
+    }
+
+    public void QuitPuzzle(CallbackContext state)
+    {
+        if (state.performed)
+        {
+            ExitPuzzle();
         }
     }
 }

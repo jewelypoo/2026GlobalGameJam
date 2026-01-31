@@ -7,23 +7,34 @@ public class UI_Manager : MonoBehaviour
 
     [SerializeField] private Image
         blackBackground,
-        mask;
+        mask,
+        cursorImage;
+
+    [SerializeField] private GameObject
+        interactTextGameObject,
+        exitButtonGameObject;
 
     private float
         fadeDuration = .3f,
         fadeDelay = .2f;
 
     private bool
-        maskActive = false,
         debounce = false;
 
     private Vector3
         maskUpPosition = new Vector3(0, 1000, 0),
         maskDownPosition = new Vector3(0, 0, 0);
 
+    private CameraHandler cameraHandler;
+    private PlayerController playerController;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        playerController = FindFirstObjectByType<PlayerController>();
+        cameraHandler = FindFirstObjectByType<CameraHandler>();
+        Cursor.lockState = CursorLockMode.Confined;
+        HideMouse();
         if (blackBackground == null)
         {
             Debug.LogError("Black Background Image is not assigned in the inspector.");
@@ -43,18 +54,18 @@ public class UI_Manager : MonoBehaviour
     {
         if (debounce) return;
         debounce = true;
-        maskActive = !maskActive;
+        playerController.maskActive = !playerController.maskActive;
 
         StartCoroutine(AsyncFadeIn(fadeDuration));
 
-        if (maskActive)
+        if (playerController.maskActive)
         {
-            print("mask is now on");
+            //print("mask is now on");
             StartCoroutine(AsyncMaskDown(fadeDuration));
         }
         else
         {
-            print("mask is now off");
+            //print("mask is now off");
             StartCoroutine(AsyncMaskUp(fadeDuration));
         }
     }
@@ -105,6 +116,7 @@ public class UI_Manager : MonoBehaviour
             yield return null;
         }
         mask.rectTransform.anchoredPosition = maskUpPosition;
+        cameraHandler.EnableMaskView();
     }
 
     private IEnumerator AsyncMaskUp(float duration = 1f)
@@ -118,6 +130,7 @@ public class UI_Manager : MonoBehaviour
             mask.rectTransform.anchoredPosition = Vector3.Lerp(maskDownPosition, maskUpPosition, alpha);
             yield return null;
         }
+        cameraHandler.DisableMaskView();
     }
 
     private void SetAlpha(Image img, float alpha)
@@ -125,5 +138,21 @@ public class UI_Manager : MonoBehaviour
         Color color = img.color;
         color.a = alpha;
         img.color = color;
+    }
+
+    public void ShowMouse()
+    {
+        Cursor.visible = true;
+        cursorImage.enabled = false;
+        interactTextGameObject.SetActive(false);
+        exitButtonGameObject.SetActive(true);
+    }
+
+    public void HideMouse()
+    {
+        Cursor.visible = false;
+        cursorImage.enabled = true;
+        interactTextGameObject.SetActive(true);
+        exitButtonGameObject.SetActive(false);
     }
 }

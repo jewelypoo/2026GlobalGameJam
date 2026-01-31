@@ -16,7 +16,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Jump",
+                    "name": "Mask",
                     "type": "Button",
                     "id": "b09eb734-59b7-430c-bd4f-0c94524b6057",
                     "expectedControlType": "",
@@ -28,6 +28,15 @@
                     "name": "Interact",
                     "type": "Button",
                     "id": "50e81863-e0e0-4568-9b94-bf90b928c6dc",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "QuitPuzzle",
+                    "type": "Button",
+                    "id": "e12b924a-2a43-48b6-9279-fb0644caeace",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -152,7 +161,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Jump",
+                    "action": "Mask",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -164,6 +173,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8fd0ecf3-fec8-47fd-abbf-3f098a3a28c8",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "QuitPuzzle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
