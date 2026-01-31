@@ -16,7 +16,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Jump",
+                    "name": "Mask",
                     "type": "Button",
                     "id": "b09eb734-59b7-430c-bd4f-0c94524b6057",
                     "expectedControlType": "",
@@ -152,7 +152,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Jump",
+                    "action": "Mask",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
