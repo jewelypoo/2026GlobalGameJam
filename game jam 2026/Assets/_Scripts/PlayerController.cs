@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     
     private CharacterController controller;
+    private UI_Manager uiManager;
 
     [Header("Movement Settings")]
     [SerializeField]
@@ -18,7 +19,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private Camera mainCamera;
-    [SerializeField] private Image blackBackground;
+
+    private bool
+        debounce = false;
 
     void Start()
     {
@@ -26,6 +29,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.LogError("CharacterController component not found on the player object.");
         }
+        uiManager = FindFirstObjectByType<UI_Manager>();
     }
 
     private void Update()
@@ -75,5 +79,14 @@ public class PlayerController : MonoBehaviour
     public void Move(CallbackContext state)
     {
         inputAxis = state.ReadValue<Vector2>();
+    }
+
+    public void Mask(CallbackContext state)
+    {
+        if (state.performed)
+        {
+            print("you pressed the mask button");
+            uiManager.ToggleMask();
+        }
     }
 }

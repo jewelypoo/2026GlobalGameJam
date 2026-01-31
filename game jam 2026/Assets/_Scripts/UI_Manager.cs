@@ -4,24 +4,62 @@ using UnityEngine.UI;
 
 public class UI_Manager : MonoBehaviour
 {
-    [SerializeField]
-    private Image
+
+    [SerializeField] private Image
         blackBackground,
         mask;
+
+    private float
+        fadeDuration = .3f,
+        fadeDelay = .2f;
+
+    private bool
+        maskActive = false,
+        debounce = false;
+
+    private Vector3
+        maskUpPosition = new Vector3(0, 1000, 0),
+        maskDownPosition = new Vector3(0, 0, 0);
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        if (blackBackground == null)
+        {
+            Debug.LogError("Black Background Image is not assigned in the inspector.");
+            return;
+        }
+        if (mask == null)
+        {
+            Debug.LogError("Mask Image is not assigned in the inspector.");
+            return;
+        }
+        blackBackground.gameObject.SetActive(true);
+        SetAlpha(blackBackground, 0f);
+        mask.rectTransform.anchoredPosition = maskUpPosition;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ToggleMask()
     {
-        
+        if (debounce) return;
+        debounce = true;
+        maskActive = !maskActive;
+
+        StartCoroutine(AsyncFadeIn(fadeDuration));
+
+        if (maskActive)
+        {
+            print("mask is now on");
+            StartCoroutine(AsyncMaskDown(fadeDuration));
+        }
+        else
+        {
+            print("mask is now off");
+            StartCoroutine(AsyncMaskUp(fadeDuration));
+        }
     }
 
-    private IEnumerator FadeIn(float duration = 1f)
+    private IEnumerator AsyncFadeIn(float duration = 1f)
     {
         float elapsedTime = 0f;
         Color blackColor = blackBackground.color;
@@ -29,16 +67,17 @@ public class UI_Manager : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
             float alpha = Mathf.Clamp01(elapsedTime / duration);
-            blackColor.a = 1f - alpha;
-            blackBackground.color = blackColor;
+            SetAlpha(blackBackground, alpha);
             yield return null;
         }
-        // Ensure the final alpha is set to 0
-        blackColor.a = 0f;
-        blackBackground.color = blackColor;
+        SetAlpha(blackBackground, 1f);
+
+        yield return new WaitForSeconds(fadeDelay);
+
+        StartCoroutine(AsyncFadeOut(duration));
     }
 
-    private IEnumerator FadeOut(float duration = 1f)
+    private IEnumerator AsyncFadeOut(float duration = 1f)
     {
         float elapsedTime = 0f;
         Color blackColor = blackBackground.color;
@@ -46,12 +85,45 @@ public class UI_Manager : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
             float alpha = Mathf.Clamp01(elapsedTime / duration);
-            blackColor.a = 1f - alpha;
-            blackBackground.color = blackColor;
+            SetAlpha(blackBackground, 1f - alpha);
             yield return null;
         }
-        // Ensure the final alpha is set to 0
-        blackColor.a = 0f;
-        blackBackground.color = blackColor;
+        SetAlpha(blackBackground, 0f);
+        debounce = false;
+    }
+
+    private IEnumerator AsyncMaskDown(float duration = 1f)
+    {
+        mask.rectTransform.anchoredPosition = maskUpPosition;
+        float elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float alpha = Mathf.Clamp01(elapsedTime / duration);
+            mask.rectTransform.anchoredPosition = Vector3.Lerp(maskUpPosition, maskDownPosition, alpha);
+
+            yield return null;
+        }
+        mask.rectTransform.anchoredPosition = maskUpPosition;
+    }
+
+    private IEnumerator AsyncMaskUp(float duration = 1f)
+    {
+        mask.rectTransform.anchoredPosition = maskDownPosition;
+        float elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float alpha = Mathf.Clamp01(elapsedTime / duration);
+            mask.rectTransform.anchoredPosition = Vector3.Lerp(maskDownPosition, maskUpPosition, alpha);
+            yield return null;
+        }
+    }
+
+    private void SetAlpha(Image img, float alpha)
+    {
+        Color color = img.color;
+        color.a = alpha;
+        img.color = color;
     }
 }
