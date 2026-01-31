@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
 
 public class PlayerController : MonoBehaviour
@@ -14,14 +15,17 @@ public class PlayerController : MonoBehaviour
         movementSpeed = 10f,
         gravity = 9.81f;
 
-    private Vector2 inputAxis;
-    private float verticalVelocity;
+    
 
     [Header("References")]
     [SerializeField] private Camera mainCamera;
 
     private bool
         debounce = false;
+    private Vector2 inputAxis;
+    private float verticalVelocity;
+    private string interactKeybindText;
+    private TagHandle interactableTagHandle;
 
     void Start()
     {
@@ -30,13 +34,48 @@ public class PlayerController : MonoBehaviour
             Debug.LogError("CharacterController component not found on the player object.");
         }
         uiManager = FindFirstObjectByType<UI_Manager>();
+        if (TryGetComponent<PlayerInput>(out PlayerInput inputSystem))
+        {
+            string keybind = inputSystem.currentActionMap.FindAction("Interact").GetBindingDisplayString(0);
+            interactKeybindText = " (" + keybind + ")";
+        }
+        else
+        {
+            interactKeybindText = " (E)";
+        }
+        interactableTagHandle = TagHandle.GetExistingTag("Interactable");
     }
 
     private void Update()
     {
         HandleMovement();
+        //CheckForInteractables();
     }
 
+    /*
+    private void CheckForInteractables()
+    {
+        RaycastHit hit;
+        Vector3 origin = mainCamera.transform.position;
+        Vector3 direction = mainCamera.transform.forward;
+
+        //Debug.DrawRay(origin, direction * interactDistance, isHit ? Color.green : Color.red, 0.1f);
+
+        if (!Physics.Raycast(origin, direction, out hit, interactDistance, InteractableLayerMask) ||
+            !hit.collider.gameObject.CompareTag(interactableTagHandle) ||
+            !hit.collider.gameObject.TryGetComponent<IInteractable>(out IInteractable thisInteractable))
+        {
+            ResetCursorInformation();
+            return;
+        }
+
+        lastHitInteractable = thisInteractable;
+
+        interactText.text = lastHitInteractable.IsUsable() ? hit.collider.gameObject.name + keybindText : hit.collider.gameObject.name;
+
+        ShowHitCursor();
+    }
+    */
     /// <summary>
     /// handles movement for player
     /// </summary>
