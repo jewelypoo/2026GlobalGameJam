@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
 
     public bool
         canUseMask = false,
+        hasBookPage = false,
         maskActive = false;
 
     public bool isMovementEnabled
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
     {
         get { return currentPuzzleObject != null; }
     }
+    public BasePuzzleObject GetCurrentPuzzle => currentPuzzleObject;
 
     void Start()
     {

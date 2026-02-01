@@ -247,6 +247,81 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.08333969, y: 0.0833403, z: 0.011074981}
   m_Center: {x: -0.0000000055879354, y: -4.6027014e-27, z: 0.00158226}
+--- !u!1 &97805178
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 97805179}
+  - component: {fileID: 97805180}
+  m_Layer: 0
+  m_Name: CinemachineCamera 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &97805179
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97805178}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.0005587954, y: 0.71602845, z: -0.69807094, w: 0.00023925304}
+  m_LocalPosition: {x: 0.49786517, y: 1.1209974, z: 0.5236379}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 940786313}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &97805180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97805178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
+  Priority:
+    Enabled: 1
+    m_Value: 2
+  OutputChannel: 1
+  StandbyUpdate: 2
+  m_StreamingVersion: 20241001
+  m_LegacyPriority: 0
+  Target:
+    TrackingTarget: {fileID: 0}
+    LookAtTarget: {fileID: 0}
+    CustomLookAtTarget: 0
+  Lens:
+    FieldOfView: 60.000004
+    OrthographicSize: 5
+    NearClipPlane: 0.01
+    FarClipPlane: 1000
+    Dutch: 0
+    ModeOverride: 0
+    PhysicalProperties:
+      GateFit: 2
+      SensorSize: {x: 21.946, y: 16.002}
+      LensShift: {x: 0, y: 0}
+      FocusDistance: 10
+      Iso: 200
+      ShutterSpeed: 0.005
+      Aperture: 16
+      BladeCount: 5
+      Curvature: {x: 2, y: 11}
+      BarrelClipping: 0.25
+      Anamorphism: 0
+  BlendHint: 0
 --- !u!1001 &138624965
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2207,8 +2282,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 940786313}
-  - component: {fileID: 940786314}
   - component: {fileID: 940786315}
+  - component: {fileID: 940786316}
   m_Layer: 0
   m_Name: Book
   m_TagString: Interactable
@@ -2232,23 +2307,9 @@ Transform:
   - {fileID: 1403048477}
   - {fileID: 1155961911}
   - {fileID: 1304541427}
+  - {fileID: 97805179}
   m_Father: {fileID: 661888515}
   m_LocalEulerAnglesHint: {x: 9.441, y: -135, z: 0}
---- !u!114 &940786314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 940786312}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4bd3cbae5a9c8444a52a17813e16838, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BasePuzzleObject
-  canBeUsed: 1
-  cameraGameObject: {fileID: 1304541426}
-  puzzleCompleted: 0
 --- !u!65 &940786315
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2270,6 +2331,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.7456052, y: 0.99999607, z: 1.7349306}
   m_Center: {x: 0.09737084, y: 0.0000000051970743, z: 0.3674701}
+--- !u!114 &940786316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940786312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e10fa13f57ad02a4bb8f2bf5335319e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BookPuzzle
+  canBeUsed: 1
+  cameraGameObject: {fileID: 1304541426}
+  startVersion: {fileID: 1208816419}
+  endVersion: {fileID: 1957746972}
+  camera2: {fileID: 97805178}
 --- !u!1 &959886126
 GameObject:
   m_ObjectHideFlags: 0
@@ -3457,7 +3535,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1242673313427970886, guid: 2ec770f7b95aff249a2a9c5837a14b7f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2440669349811035177, guid: 2ec770f7b95aff249a2a9c5837a14b7f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3877,6 +3955,11 @@ Light:
   m_LightUnit: 0
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!1 &1208816419 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 771087424171514839, guid: 4dcc8273d48229548b64447bbea1361a, type: 3}
+  m_PrefabInstance: {fileID: 1403048476}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1246760739
 GameObject:
   m_ObjectHideFlags: 0
@@ -5558,6 +5641,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.08333954, y: 0.0833403, z: 0.011074981}
   m_Center: {x: -0.000000113621354, y: -2.9473808e-28, z: 0.00158226}
+--- !u!1 &1957746972 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1242673313427970886, guid: 2ec770f7b95aff249a2a9c5837a14b7f, type: 3}
+  m_PrefabInstance: {fileID: 1155961910}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1981070455 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5312687796982956511, guid: 4e239abba2c963c4ca6f55b0dbda5300, type: 3}
@@ -6482,9 +6570,11 @@ GameObject:
   - component: {fileID: 1306392493177139209}
   - component: {fileID: 2706353967863988140}
   - component: {fileID: 173971127655238502}
+  - component: {fileID: 2706353967863988142}
+  - component: {fileID: 2706353967863988141}
   m_Layer: 0
   m_Name: paper cutout
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6537,6 +6627,39 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1831537476770933427}
   m_Mesh: {fileID: 8462815884240641210, guid: 3e1ff11ae99ebf048bbde214b1fd1b05, type: 3}
+--- !u!65 &2706353967863988141
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831537476770933427}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.8562232, z: 1}
+  m_Center: {x: 1.1403859e-15, y: 0.3687258, z: 0.0000305313}
+--- !u!114 &2706353967863988142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831537476770933427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b2f0c25fdcc733478315157a3f9eaf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BookPaperPickup
 --- !u!23 &2732384492506555338
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6684,7 +6807,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PipePuzzle
   canBeUsed: 1
   cameraGameObject: {fileID: 251097500}
-  puzzleCompleted: 0
   pipes:
   - {fileID: 8375811160136145793}
   - {fileID: 1779323981}

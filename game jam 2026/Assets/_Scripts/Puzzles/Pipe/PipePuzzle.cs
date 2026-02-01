@@ -31,7 +31,7 @@ public class PipePuzzle : BasePuzzleObject
                 pipe.isLocked = true;
             }
             OnPuzzleComplete();
-            print("Pipe Puzzle Complete!");
+            //print("Pipe Puzzle Complete!");
         }
     }
 

@@ -11,10 +11,14 @@ public class BasePuzzleObject : MonoBehaviour, IInteractable
     [SerializeField] private GameObject 
         cameraGameObject;
 
-    private bool isActive = false;
-    [HideInInspector] public bool puzzleCompleted = false;
+    protected bool isActive = false;
+    [HideInInspector] protected bool puzzleCompleted = false;
 
-    private PlayerController playerController;
+    protected PlayerController playerController;
+    protected GameObject MainCamera
+    {
+        get { return cameraGameObject; }
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public virtual void Start()
@@ -33,7 +37,7 @@ public class BasePuzzleObject : MonoBehaviour, IInteractable
     public virtual void OnInteract()
     {
         if ((!IsUsable() && IsBeingUsed() == false) || puzzleCompleted == true) return;
-        print("now using " + transform.name);
+        //print("now using " + transform.name);
         if (cameraGameObject != null)
         {
             isActive = true;
