@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 6998908590549121677}
   - component: {fileID: 8936363623347211579}
   - component: {fileID: 8647718457934558691}
+  - component: {fileID: 4444529428069369977}
   m_Layer: 0
   m_Name: closet_door
   m_TagString: Untagged
@@ -247,3 +248,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.8999103, y: 2.2152197, z: 0.111644804}
   m_Center: {x: 0.44995514, y: 1.1076099, z: 0.055822402}
+--- !u!95 &4444529428069369977
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8178224936283264774}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f7cef629398e0674c88a4d92beb2e027, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
