@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 6998908590549121677}
   - component: {fileID: 8936363623347211579}
   - component: {fileID: 8647718457934558691}
-  - component: {fileID: 4444529428069369977}
+  - component: {fileID: 2114136052997494445}
   m_Layer: 0
   m_Name: closet_door
   m_TagString: Untagged
@@ -248,7 +248,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.8999103, y: 2.2152197, z: 0.111644804}
   m_Center: {x: 0.44995514, y: 1.1076099, z: 0.055822402}
---- !u!95 &4444529428069369977
+--- !u!95 &2114136052997494445
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
