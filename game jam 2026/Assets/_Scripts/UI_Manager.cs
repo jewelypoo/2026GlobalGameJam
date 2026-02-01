@@ -33,7 +33,6 @@ public class UI_Manager : MonoBehaviour
     {
         playerController = FindFirstObjectByType<PlayerController>();
         cameraHandler = FindFirstObjectByType<CameraHandler>();
-        Cursor.lockState = CursorLockMode.Confined;
         HideMouse();
         if (blackBackground == null)
         {
@@ -143,6 +142,7 @@ public class UI_Manager : MonoBehaviour
     public void ShowMouse()
     {
         Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         cursorImage.enabled = false;
         interactTextGameObject.SetActive(false);
         exitButtonGameObject.SetActive(true);
@@ -151,6 +151,7 @@ public class UI_Manager : MonoBehaviour
     public void HideMouse()
     {
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         cursorImage.enabled = true;
         interactTextGameObject.SetActive(true);
         exitButtonGameObject.SetActive(false);

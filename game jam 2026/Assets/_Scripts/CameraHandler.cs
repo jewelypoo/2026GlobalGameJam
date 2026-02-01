@@ -22,7 +22,7 @@ public class CameraHandler : MonoBehaviour
     private string interactKeybindText;
     private TagHandle interactableTagHandle;
     private IInteractable lastHitInteractable;
-    private int maskLayer, nonMaskLayer;
+    private int maskLayer, nonMaskLayer, clickableLayer;
     private PlayerController playerController;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -31,12 +31,13 @@ public class CameraHandler : MonoBehaviour
         playerController = FindFirstObjectByType<PlayerController>();
         maskLayer = LayerMask.GetMask("Mask Object");
         nonMaskLayer = LayerMask.GetMask("Nonmask Object");
+        clickableLayer = LayerMask.GetMask("Clickable");
         DisableMaskView();
         if (TryGetComponent<PlayerInput>(out PlayerInput inputSystem))
         {
             string keybind = inputSystem.currentActionMap.FindAction("Interact").GetBindingDisplayString(0);
             interactKeybindText = " (" + keybind + ")";
-            print("find input system yay");
+            //print("find input system yay");
         }
         else
         {
@@ -86,7 +87,7 @@ public class CameraHandler : MonoBehaviour
 
         //Debug.DrawRay(origin, direction * interactDistance, isHit ? Color.green : Color.red, 0.1f);
 
-        if (!Physics.Raycast(origin, direction, out hit, interactDistance) ||
+        if (!Physics.Raycast(origin, direction, out hit, interactDistance, ~clickableLayer) ||
             !hit.collider.gameObject.CompareTag(interactableTagHandle) ||
             !hit.collider.gameObject.TryGetComponent<IInteractable>(out IInteractable thisInteractable))
         {
@@ -109,6 +110,24 @@ public class CameraHandler : MonoBehaviour
         {
             lastHitInteractable.OnInteract();
             
+        }
+    }
+
+    public void OnClick(CallbackContext state)
+    {
+        if (state.performed)
+        {
+            RaycastHit hit;
+            //Vector2 mousePos = Camera.main.ScreenToViewportPoint(Mouse.current.position.ReadValue());
+            Vector2 mousePos = Mouse.current.position.ReadValue();
+            Ray ray = mainCamera.ScreenPointToRay(mousePos);
+            if (Physics.Raycast(ray, out hit, interactDistance))
+            {
+                if (hit.collider.gameObject.TryGetComponent<IClickable>(out IClickable clickable))
+                {
+                    clickable.OnClick();
+                }
+            }
         }
     }
 }

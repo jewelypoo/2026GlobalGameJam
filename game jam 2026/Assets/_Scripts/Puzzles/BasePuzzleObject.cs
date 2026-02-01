@@ -16,7 +16,7 @@ public class BasePuzzleObject : MonoBehaviour, IInteractable
     private PlayerController playerController;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public virtual void Start()
     {
         playerController = FindFirstObjectByType<PlayerController>();
         if (playerController == null)
@@ -26,7 +26,7 @@ public class BasePuzzleObject : MonoBehaviour, IInteractable
         cameraGameObject.SetActive(false);
     }
 
-    public void OnInteract()
+    public virtual void OnInteract()
     {
         if (!IsUsable() && IsBeingUsed() == false) return;
         print("now using " + transform.name);
@@ -38,7 +38,7 @@ public class BasePuzzleObject : MonoBehaviour, IInteractable
         }
     }
 
-    public void StopUsing()
+    public virtual void StopUsing()
     {
         if (cameraGameObject != null)
         {

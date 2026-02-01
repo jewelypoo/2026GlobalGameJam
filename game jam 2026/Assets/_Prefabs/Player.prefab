@@ -334,6 +334,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: e12b924a-2a43-48b6-9279-fb0644caeace
     m_ActionName: 'PlayerControls/QuitPuzzle[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 711565872313988705}
+        m_TargetAssemblyTypeName: CameraHandler, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7e9a24cd-4e36-4c03-8e8f-3f6e84adb898
+    m_ActionName: 'PlayerControls/Click[/Mouse/press]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerControls
