@@ -22,7 +22,7 @@ public class UI_Manager : MonoBehaviour
         debounce = false;
 
     private Vector3
-        maskUpPosition = new Vector3(0, 2000, 0),
+        maskUpPosition = new Vector3(0, 2500, 0),
         maskDownPosition = new Vector3(0, 0, 0);
 
     private CameraHandler cameraHandler;
