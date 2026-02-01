@@ -39,7 +39,7 @@ public class PipePuzzle : BasePuzzleObject
         {
             if (!pipe.IsCorrectlyOriented())
             {
-                print(pipe.name + " is not correctly oriented.");
+                //print(pipe.name + " is not correctly oriented.");
                 return false;
             }
         }

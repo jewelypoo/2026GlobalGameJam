@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 
@@ -37,6 +38,17 @@ public class KeypadPuzzle : BasePuzzleObject
         input += num;
         displayText.text = input;
     }
+    public override void OnInteract()
+    {
+        base.OnInteract();
+        GetComponent<BoxCollider>().enabled = false;
+    }
+
+    public override void StopUsing()
+    {
+        base.StopUsing();
+        GetComponent<BoxCollider>().enabled = true;
+    }
 
     private void Clear()
     {
@@ -58,7 +70,9 @@ public class KeypadPuzzle : BasePuzzleObject
         if (input == code)
         {
             displayText.text = "CLEAR!";
+            
             OnPuzzleComplete();
+            StartCoroutine(OnComplete());
         }
         else
         {
@@ -74,5 +88,11 @@ public class KeypadPuzzle : BasePuzzleObject
         Clear();
 
         debounce = false;
+    }
+
+    private IEnumerator OnComplete()
+    {
+        yield return new WaitForSeconds(1f);
+        Destroy(gameObject);
     }
 }
