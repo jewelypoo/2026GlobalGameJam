@@ -9,6 +9,7 @@ public class KeypadPuzzle : BasePuzzleObject
     [SerializeField] private int 
         codeLength = 4;
     [SerializeField] TMP_Text displayText;
+    [SerializeField] private AudioSource beepSound, correctSound, errorSound;
     
     private string code = "1414", input;
 
@@ -33,10 +34,11 @@ public class KeypadPuzzle : BasePuzzleObject
         }
         string num = number.ToString();
         // handle number press logic
-        print("number pressed: " + number);
+        //print("number pressed: " + number);
 
         input += num;
         displayText.text = input;
+        beepSound.Play();
     }
     public override void OnInteract()
     {
@@ -70,7 +72,7 @@ public class KeypadPuzzle : BasePuzzleObject
         if (input == code)
         {
             displayText.text = "CLEAR!";
-            
+            correctSound.Play();
             OnPuzzleComplete();
             StartCoroutine(OnComplete());
         }
@@ -83,6 +85,7 @@ public class KeypadPuzzle : BasePuzzleObject
     private IEnumerator DebounceDelay()
     {
         displayText.text = "WRONG";
+        errorSound.Play();
         yield return new WaitForSeconds(.67f);
 
         Clear();
