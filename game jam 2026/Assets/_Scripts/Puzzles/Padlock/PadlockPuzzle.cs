@@ -39,6 +39,7 @@ public class PadlockPuzzle : BasePuzzleObject
         base.OnPuzzleComplete();
         openBox.SetActive(true);
         closedBox.SetActive(false);
+        GetComponent<BoxCollider>().enabled = false;
     }
 
     public void CheckSolved()
@@ -56,4 +57,5 @@ public class PadlockPuzzle : BasePuzzleObject
             OnPuzzleComplete();
         }
     }
+
 }

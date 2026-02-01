@@ -1804,6 +1804,26 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0.2582686
       objectReference: {fileID: 0}
+    - target: {fileID: 5731590142764178430, guid: 4e239abba2c963c4ca6f55b0dbda5300, type: 3}
+      propertyPath: m_fontSize
+      value: 38
+      objectReference: {fileID: 0}
+    - target: {fileID: 5731590142764178430, guid: 4e239abba2c963c4ca6f55b0dbda5300, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: ed77a5f98f0772240b16343ae85809c1, type: 2}
+    - target: {fileID: 5731590142764178430, guid: 4e239abba2c963c4ca6f55b0dbda5300, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 38
+      objectReference: {fileID: 0}
+    - target: {fileID: 5731590142764178430, guid: 4e239abba2c963c4ca6f55b0dbda5300, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 3266938663988257479, guid: ed77a5f98f0772240b16343ae85809c1, type: 2}
+    - target: {fileID: 5731590142764178430, guid: 4e239abba2c963c4ca6f55b0dbda5300, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
