@@ -8,6 +8,8 @@ public class PipePuzzle : BasePuzzleObject
     public PipeTile[] pipes;
 
     private int totalPipeCount;
+    public GameObject frontPanel;
+    public GameObject card;
 
     public override void Start()
     {
@@ -33,6 +35,7 @@ public class PipePuzzle : BasePuzzleObject
         }
     }
 
+
     private bool IsPuzzleComplete()
     {
         foreach (PipeTile pipe in pipes)
@@ -44,5 +47,24 @@ public class PipePuzzle : BasePuzzleObject
             }
         }
         return true;
+    }
+    public override void OnInteract()
+    {
+        base.OnInteract();
+        GetComponent<BoxCollider>().enabled = false;
+    }
+
+    public override void StopUsing()
+    {
+        base.StopUsing();
+        GetComponent<BoxCollider>().enabled = true;
+    }
+
+    public override void OnPuzzleComplete()
+    {
+        base.OnPuzzleComplete();
+        frontPanel.SetActive(false);
+        card.SetActive(true);
+        this.GetComponent<BoxCollider>().enabled = false;
     }
 }

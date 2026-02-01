@@ -37,13 +37,13 @@ public class PipeTile : MonoBehaviour, IClickable
 
     public void Rotate()
     {
-        transform.Rotate(new Vector3(90f, 0f, 0f), Space.Self);
+        transform.Rotate(new Vector3(0f, 0f, 90f), Space.Self);
         currentRotationSteps = (currentRotationSteps + 1) % 4;
     }
 
     public float GetRotation()
     {
-        return transform.eulerAngles.x;
+        return transform.eulerAngles.z;
     }
 
     public bool IsCorrectlyOriented()
