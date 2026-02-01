@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 9966b397702d53647b6bd12ac5dfac76
+guid: bff48ae32f0e19f49809e7b039c326de
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
   externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: paper_cutout1
+    second: {fileID: 2100000, guid: 090e2d6bd76f75447bef0352c6e3e0db, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

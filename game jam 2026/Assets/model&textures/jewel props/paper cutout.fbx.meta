@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9966b397702d53647b6bd12ac5dfac76
+guid: 3e1ff11ae99ebf048bbde214b1fd1b05
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: standardSurface1
-    second: {fileID: 2100000, guid: f5c050ffc10f5d24d8a8f2a2321f0841, type: 2}
+      name: paper_cutout1
+    second: {fileID: 2100000, guid: 090e2d6bd76f75447bef0352c6e3e0db, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
