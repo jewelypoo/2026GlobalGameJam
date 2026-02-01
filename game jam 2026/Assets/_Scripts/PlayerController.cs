@@ -24,7 +24,9 @@ public class PlayerController : MonoBehaviour
     private float verticalVelocity;
     private BasePuzzleObject currentPuzzleObject;
 
-    public bool maskActive = false;
+    public bool
+        canUseMask = false,
+        maskActive = false;
 
     public bool isMovementEnabled
     {
@@ -125,6 +127,7 @@ public class PlayerController : MonoBehaviour
 
     public void Mask(CallbackContext state)
     {
+        if (!canUseMask) return;
         if (state.performed)
         {
             print("you pressed the mask button");
