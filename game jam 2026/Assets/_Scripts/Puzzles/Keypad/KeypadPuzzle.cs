@@ -15,13 +15,14 @@ public class KeypadPuzzle : BasePuzzleObject
 
     private bool debounce = false;
     private int keysPressed = 0;
+    private UI_Manager manager;
     public Collider finaleCollider;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
     {
         base.Start();
-        // generate a random code
+        manager = FindFirstObjectByType<UI_Manager>();
         Clear();
     }
 
@@ -75,6 +76,7 @@ public class KeypadPuzzle : BasePuzzleObject
             displayText.text = "CLEAR!";
             correctSound.Play();
             OnPuzzleComplete();
+            manager.StartDialogue("Plop pleep. That is my escape hatch. Do not touch it. You will regret this purchase. Eerp.");
             StartCoroutine(OnComplete());
         }
         else
@@ -98,6 +100,7 @@ public class KeypadPuzzle : BasePuzzleObject
     {
         yield return new WaitForSeconds(1f);
         finaleCollider.enabled = true;
+        
         Destroy(gameObject);
     }
 }

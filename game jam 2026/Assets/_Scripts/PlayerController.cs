@@ -38,6 +38,8 @@ public class PlayerController : MonoBehaviour
     {
         get { return currentPuzzleObject != null; }
     }
+
+    public Camera GetMainCamera => mainCamera;
     public BasePuzzleObject GetCurrentPuzzle => currentPuzzleObject;
 
     void Start()
@@ -188,6 +190,14 @@ public class PlayerController : MonoBehaviour
             {
                 keypadPuzzle.Enter();
             }
+        }
+    }
+
+    public void OnDialogueSkip(CallbackContext state)
+    {
+        if (state.performed)
+        {
+            uiManager.OnDialogueContinue();
         }
     }
 

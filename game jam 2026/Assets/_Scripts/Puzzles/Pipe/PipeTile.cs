@@ -9,6 +9,7 @@ public class PipeTile : MonoBehaviour, IClickable
 
     private int currentRotationSteps = 0;
     private int correctRotationSteps = 0;
+    [SerializeField] private AudioSource clickSound;
 
     private void Awake()
     {
@@ -29,6 +30,11 @@ public class PipeTile : MonoBehaviour, IClickable
             return;
         }
         Rotate();
+
+        if (clickSound != null)
+        {
+            clickSound.Play();
+        }
         if (parentPuzzle != null)
         {
             parentPuzzle.OnTileRotate(this);

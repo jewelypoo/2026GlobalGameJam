@@ -10,6 +10,7 @@ public class PipePuzzle : BasePuzzleObject
     private int totalPipeCount;
     public GameObject frontPanel;
     public GameObject card;
+    [SerializeField] private AudioSource winSound;
 
     public override void Start()
     {
@@ -66,5 +67,9 @@ public class PipePuzzle : BasePuzzleObject
         frontPanel.SetActive(false);
         card.SetActive(true);
         this.GetComponent<BoxCollider>().enabled = false;
+        if (winSound != null)
+        {
+            winSound.Play();
+        }
     }
 }

@@ -163,6 +163,15 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""End Dialogue"",
+                    ""type"": ""Button"",
+                    ""id"": ""9a03f85f-cf86-4375-a4f4-34ea180905bf"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -451,6 +460,17 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""action"": ""Enter"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""909075ff-d3a7-47e5-a7d1-ef52a4207500"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""End Dialogue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -467,6 +487,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         m_PlayerControls_NumKeys = m_PlayerControls.FindAction("NumKeys", throwIfNotFound: true);
         m_PlayerControls_Backspace = m_PlayerControls.FindAction("Backspace", throwIfNotFound: true);
         m_PlayerControls_Enter = m_PlayerControls.FindAction("Enter", throwIfNotFound: true);
+        m_PlayerControls_EndDialogue = m_PlayerControls.FindAction("End Dialogue", throwIfNotFound: true);
     }
 
     ~@PlayerActions()
@@ -555,6 +576,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerControls_NumKeys;
     private readonly InputAction m_PlayerControls_Backspace;
     private readonly InputAction m_PlayerControls_Enter;
+    private readonly InputAction m_PlayerControls_EndDialogue;
     /// <summary>
     /// Provides access to input actions defined in input action map "PlayerControls".
     /// </summary>
@@ -598,6 +620,10 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "PlayerControls/Enter".
         /// </summary>
         public InputAction @Enter => m_Wrapper.m_PlayerControls_Enter;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerControls/EndDialogue".
+        /// </summary>
+        public InputAction @EndDialogue => m_Wrapper.m_PlayerControls_EndDialogue;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -648,6 +674,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @Enter.started += instance.OnEnter;
             @Enter.performed += instance.OnEnter;
             @Enter.canceled += instance.OnEnter;
+            @EndDialogue.started += instance.OnEndDialogue;
+            @EndDialogue.performed += instance.OnEndDialogue;
+            @EndDialogue.canceled += instance.OnEndDialogue;
         }
 
         /// <summary>
@@ -683,6 +712,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @Enter.started -= instance.OnEnter;
             @Enter.performed -= instance.OnEnter;
             @Enter.canceled -= instance.OnEnter;
+            @EndDialogue.started -= instance.OnEndDialogue;
+            @EndDialogue.performed -= instance.OnEndDialogue;
+            @EndDialogue.canceled -= instance.OnEndDialogue;
         }
 
         /// <summary>
@@ -779,5 +811,12 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnEnter(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "End Dialogue" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnEndDialogue(InputAction.CallbackContext context);
     }
 }

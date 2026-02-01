@@ -18,6 +18,11 @@ public class BookPuzzle : BasePuzzleObject, IClickable
         camera2.SetActive(true);
         startVersion.SetActive(true);
         endVersion.SetActive(true);
+        BookPaperPickup bookPage = FindFirstObjectByType<BookPaperPickup>();
+        if (bookPage != null)
+        {
+            Destroy(bookPage.gameObject);
+        }
     }
 
     public override void OnInteract()

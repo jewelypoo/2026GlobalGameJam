@@ -8,6 +8,7 @@ public class PadlockPuzzle : BasePuzzleObject
     [SerializeField] private PadlockSegment[] segments;
 
     [HideInInspector] private string code = "PMGK";
+    [SerializeField] private AudioSource openSound;
 
     public string Code => code;
 
@@ -40,6 +41,10 @@ public class PadlockPuzzle : BasePuzzleObject
         openBox.SetActive(true);
         closedBox.SetActive(false);
         GetComponent<BoxCollider>().enabled = false;
+        if (openSound != null)
+        {
+            openSound.Play();
+        }
     }
 
     public void CheckSolved()

@@ -20,6 +20,7 @@ public class TVRotate : MonoBehaviour
         }
         
     }
+    /*
     public void OnTriggerEnter(Collider other)
     {
         //print("tutorial");
@@ -37,4 +38,5 @@ public class TVRotate : MonoBehaviour
         yield return new WaitForSeconds(3f);
         canShowText= true;
     }
+    */
 }

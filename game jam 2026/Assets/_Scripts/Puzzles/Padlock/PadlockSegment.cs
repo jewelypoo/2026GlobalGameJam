@@ -7,6 +7,7 @@ public class PadlockSegment : MonoBehaviour
     [SerializeField] private TMP_Text display;
     [SerializeField] private PadlockPuzzle puzzle;
     [SerializeField] private int segmentIndex = 0;
+    [SerializeField] private AudioSource clickSound;
     public string input;
     private int index = 0;
 
@@ -46,6 +47,10 @@ public class PadlockSegment : MonoBehaviour
     private void UpdateDisplay()
     {
         display.text = letters[index];
+        if (clickSound != null)
+        {
+            clickSound.Play();
+        }
     }
 
     public string GetInput()
