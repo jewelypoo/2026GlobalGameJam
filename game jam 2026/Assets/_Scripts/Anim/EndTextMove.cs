@@ -12,11 +12,13 @@ public class EndTextMove : MonoBehaviour
     private void Start()
     {
         quitCanvas.SetActive(false);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         StartCoroutine(DelayShow());
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         distance += moveSpeed * Time.deltaTime * .1f;
         transform.position = transform.position + new Vector3(0, distance, 0);
