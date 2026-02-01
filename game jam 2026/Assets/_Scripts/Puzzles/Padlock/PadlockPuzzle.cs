@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PadlockPuzzle : BasePuzzleObject
 {
-    [SerializeField] private GameObject padlockCanvasObject;
+    [SerializeField] private GameObject padlockCanvasObject, openBox, closedBox;
 
     [SerializeField] private PadlockSegment[] segments;
 
@@ -15,13 +15,16 @@ public class PadlockPuzzle : BasePuzzleObject
     public override void Start()
     {
         base.Start();
-
+        openBox.SetActive(false);
+        closedBox.SetActive(true);
         padlockCanvasObject.SetActive(false);
     }
 
     public override void OnInteract()
     {
         base.OnInteract();
+
+        if (!IsUsable()) return;
         padlockCanvasObject.SetActive(true);
     }
 
@@ -31,7 +34,12 @@ public class PadlockPuzzle : BasePuzzleObject
         padlockCanvasObject.SetActive(false );
     }
 
-    
+    public override void OnPuzzleComplete()
+    {
+        base.OnPuzzleComplete();
+        openBox.SetActive(true);
+        closedBox.SetActive(false);
+    }
 
     public void CheckSolved()
     {
