@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static UnityEngine.InputSystem.InputAction;
 
 public class PlayerController : MonoBehaviour
@@ -185,6 +186,14 @@ public class PlayerController : MonoBehaviour
             {
                 keypadPuzzle.Enter();
             }
+        }
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Finish"))
+        {
+            SceneManager.LoadScene(2);
         }
     }
 }

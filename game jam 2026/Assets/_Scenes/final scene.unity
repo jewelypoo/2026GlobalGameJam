@@ -4019,6 +4019,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6035191150807209282, guid: dcf3680a6abe4e04c8cbc42d459ffebf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6035191150807209282, guid: dcf3680a6abe4e04c8cbc42d459ffebf, type: 3}
+      propertyPath: m_TagString
+      value: Finish
+      objectReference: {fileID: 0}
+    - target: {fileID: 6161386987295178557, guid: dcf3680a6abe4e04c8cbc42d459ffebf, type: 3}
+      propertyPath: finaleCollider
+      value: 
+      objectReference: {fileID: 1694320957}
     - target: {fileID: 7494482301505669382, guid: dcf3680a6abe4e04c8cbc42d459ffebf, type: 3}
       propertyPath: doorSound
       value: 
@@ -4055,10 +4067,39 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3417774738781492071, guid: dcf3680a6abe4e04c8cbc42d459ffebf, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1294473663}
+    - targetCorrespondingSourceObject: {fileID: 6035191150807209282, guid: dcf3680a6abe4e04c8cbc42d459ffebf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1694320957}
     - targetCorrespondingSourceObject: {fileID: 7954622311211995292, guid: dcf3680a6abe4e04c8cbc42d459ffebf, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: dcf3680a6abe4e04c8cbc42d459ffebf, type: 3}
+--- !u!1 &1694320956 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6035191150807209282, guid: dcf3680a6abe4e04c8cbc42d459ffebf, type: 3}
+  m_PrefabInstance: {fileID: 1694320955}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1694320957
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694320956}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 1.1651419, y: 1.0330373, z: 1.1651419}
+  m_Center: {x: 0, y: 0.35502392, z: 0}
 --- !u!1 &1779203000
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,6 +15,7 @@ public class KeypadPuzzle : BasePuzzleObject
 
     private bool debounce = false;
     private int keysPressed = 0;
+    public Collider finaleCollider;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
@@ -96,6 +97,7 @@ public class KeypadPuzzle : BasePuzzleObject
     private IEnumerator OnComplete()
     {
         yield return new WaitForSeconds(1f);
+        finaleCollider.enabled = true;
         Destroy(gameObject);
     }
 }
