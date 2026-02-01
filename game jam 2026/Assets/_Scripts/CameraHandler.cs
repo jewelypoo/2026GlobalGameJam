@@ -22,7 +22,7 @@ public class CameraHandler : MonoBehaviour
     private string interactKeybindText;
     private TagHandle interactableTagHandle;
     private IInteractable lastHitInteractable;
-    private int maskLayer, nonMaskLayer, clickableLayer;
+    private int maskLayer, nonMaskLayer, clickableLayer, currentIgnoreLayer;
     private PlayerController playerController;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -58,6 +58,7 @@ public class CameraHandler : MonoBehaviour
     public void EnableMaskView()
     {
         mainCamera.cullingMask = ~nonMaskLayer;
+        currentIgnoreLayer = nonMaskLayer;
     }
 
     /// <summary>
@@ -66,6 +67,7 @@ public class CameraHandler : MonoBehaviour
     public void DisableMaskView()
     {
         mainCamera.cullingMask = ~maskLayer;
+        currentIgnoreLayer = maskLayer;
     }
 
     private void ShowHitCursor()
@@ -87,7 +89,7 @@ public class CameraHandler : MonoBehaviour
 
         //Debug.DrawRay(origin, direction * interactDistance, isHit ? Color.green : Color.red, 0.1f);
 
-        if (!Physics.Raycast(origin, direction, out hit, interactDistance, ~clickableLayer) ||
+        if (!Physics.Raycast(origin, direction, out hit, interactDistance, ~currentIgnoreLayer) ||
             !hit.collider.gameObject.CompareTag(interactableTagHandle) ||
             !hit.collider.gameObject.TryGetComponent<IInteractable>(out IInteractable thisInteractable))
         {

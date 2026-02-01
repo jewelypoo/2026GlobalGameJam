@@ -350,6 +350,54 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 7e9a24cd-4e36-4c03-8e8f-3f6e84adb898
     m_ActionName: 'PlayerControls/Click[/Mouse/press]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6025790168032771502}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: NumberPressed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 9c50f852-42ba-440d-b045-d67fc897b46a
+    m_ActionName: 'PlayerControls/NumKeys[/Keyboard/1,/Keyboard/2,/Keyboard/3,/Keyboard/4,/Keyboard/5,/Keyboard/6,/Keyboard/7,/Keyboard/8,/Keyboard/9,/Keyboard/0]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6025790168032771502}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Backspace
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c38ad2fa-d096-4cfb-b72f-87c902eb5041
+    m_ActionName: 'PlayerControls/Backspace[/Keyboard/backspace]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6025790168032771502}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Enter
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5d8b21dd-b7c6-4c6e-bdf2-db5017466b4b
+    m_ActionName: 'PlayerControls/Enter[/Keyboard/enter]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerControls
