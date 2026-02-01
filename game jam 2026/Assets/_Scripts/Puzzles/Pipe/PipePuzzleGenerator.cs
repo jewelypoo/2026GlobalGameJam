@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PipePuzzleGenerator : MonoBehaviour
 {
+    /*
     private PipePuzzle puzzle;
     private float spacing = .2f;
     /// <summary>
@@ -246,4 +247,5 @@ public class PipePuzzleGenerator : MonoBehaviour
 
         return tile;
     }
+    */
 }

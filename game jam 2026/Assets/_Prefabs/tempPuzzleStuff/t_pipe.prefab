@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4594200200995709999}
   - component: {fileID: 3042883411136237392}
   - component: {fileID: 2107832320002824200}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: t_pipe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 38.145, y: 1.087, z: -12.911}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.2}
+  m_LocalScale: {x: 0.025, y: 0.025, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2900443883236504576}
@@ -148,10 +148,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d3a73b7aae708b4f99cf925cd2a283a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PipeTile
-  gridPosition: {x: 0, y: 0}
-  puzzle: {fileID: 0}
-  baseConnections: 14
-  connections: 14
+  parentPuzzle: {fileID: 0}
+  isLocked: 0
+  isStraight: 0
 --- !u!1 &4497422992777353264
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,7 +162,7 @@ GameObject:
   - component: {fileID: 2900443883236504576}
   - component: {fileID: 6463568802934184970}
   - component: {fileID: 2002178679043254699}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

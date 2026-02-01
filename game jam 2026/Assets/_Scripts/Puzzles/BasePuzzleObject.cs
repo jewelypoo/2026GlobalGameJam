@@ -12,6 +12,7 @@ public class BasePuzzleObject : MonoBehaviour, IInteractable
         cameraGameObject;
 
     private bool isActive = false;
+    [HideInInspector] public bool puzzleCompleted = false;
 
     private PlayerController playerController;
 
@@ -28,7 +29,7 @@ public class BasePuzzleObject : MonoBehaviour, IInteractable
 
     public virtual void OnInteract()
     {
-        if (!IsUsable() && IsBeingUsed() == false) return;
+        if ((!IsUsable() && IsBeingUsed() == false) || puzzleCompleted == true) return;
         print("now using " + transform.name);
         if (cameraGameObject != null)
         {
@@ -46,6 +47,13 @@ public class BasePuzzleObject : MonoBehaviour, IInteractable
             cameraGameObject.SetActive(false);
             playerController.StopCurrentPuzzle();
         }
+    }
+
+    public virtual void OnPuzzleComplete()
+    {
+        puzzleCompleted = true;
+        canBeUsed = false;
+        StopUsing();
     }
 
     public bool IsUsable() => canBeUsed;

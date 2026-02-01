@@ -1,71 +1,57 @@
 using UnityEngine;
 
-/// <summary>
-/// directions that the piece is currently connected to
-/// bitwise flags, neat stuff
-/// </summary>
-[System.Flags]
-public enum  Dir
-{
-    None = 0,
-    North = 1,
-    East = 2,
-    South = 4,
-    West = 8
-}
 
 public class PipeTile : MonoBehaviour, IClickable
 {
-    public Vector2Int gridPosition;
-    [HideInInspector] public PipePuzzle puzzle;
-
+    public PipePuzzle parentPuzzle;
     public bool isLocked = false;
-    public Dir baseConnections;
-    [HideInInspector] public Dir connections;
+    public bool isStraight = false;
 
-    public void OnClick()
+    private int currentRotationSteps = 0;
+    private int correctRotationSteps = 0;
+
+    private void Awake()
     {
-        /*
-        if (!puzzle.IsBeingUsed())
-        {
-            return;
-        }*/
+        int spins = Random.Range(0, 4);
+
         if (isLocked)
         {
             return;
         }
-        //print("clicked pipe tile at " + gridPosition);
+        for (int i = 0; i < spins; i++)
+            Rotate();
+    }
+
+    public void OnClick()
+    {
+        if (isLocked)
+        {
+            return;
+        }
         Rotate();
-        puzzle.OnTileRotate(gridPosition);
+        if (parentPuzzle != null)
+        {
+            parentPuzzle.OnTileRotate(this);
+        }
     }
 
     public void Rotate()
     {
-        if (gameObject == null)
-        {
-            return;
-        }
         transform.Rotate(new Vector3(90f, 0f, 0f), Space.Self);
-        connections = RotateData(connections);
+        currentRotationSteps = (currentRotationSteps + 1) % 4;
     }
 
-    private Dir RotateData(Dir d)
+    public float GetRotation()
     {
-        Dir result = Dir.None;
-
-        if ((d & Dir.North) != 0) result |= Dir.East;
-        if ((d & Dir.East) != 0) result |= Dir.South;
-        if ((d & Dir.South) != 0) result |= Dir.West;
-        if ((d & Dir.West) != 0) result |= Dir.North;
-
-        return result;
+        return transform.eulerAngles.x;
     }
 
-    public bool Has(Dir d) => (connections & d) != 0;
-
-    public void ResetToBase()
+    public bool IsCorrectlyOriented()
     {
-        transform.localRotation = Quaternion.identity;
-        connections = baseConnections;
+        if (isStraight)
+        {
+            return currentRotationSteps % 2 == correctRotationSteps % 2;
+        }
+        return currentRotationSteps == correctRotationSteps;
     }
 }
