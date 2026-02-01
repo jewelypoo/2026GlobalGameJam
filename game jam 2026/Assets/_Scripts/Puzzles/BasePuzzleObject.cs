@@ -24,7 +24,10 @@ public class BasePuzzleObject : MonoBehaviour, IInteractable
         {
             Debug.LogError("playercontroller not found in scene.");
         }
-        cameraGameObject.SetActive(false);
+        if (cameraGameObject != null)
+        {
+            cameraGameObject.SetActive(false);
+        }
     }
 
     public virtual void OnInteract()

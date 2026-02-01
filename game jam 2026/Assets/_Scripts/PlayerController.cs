@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
 
@@ -142,6 +143,45 @@ public class PlayerController : MonoBehaviour
         if (state.performed)
         {
             ExitPuzzle();
+        }
+    }
+
+    public void NumberPressed(CallbackContext state)
+    {
+        if (currentPuzzleObject == null) return;
+        if (state.performed)
+        {
+            if (int.TryParse(state.control.name, out int number))
+            {
+                if (currentPuzzleObject.TryGetComponent<KeypadPuzzle>(out KeypadPuzzle keypadPuzzle))
+                {
+                    keypadPuzzle.NumberPressed(number);
+                }
+            }
+        }
+    }
+
+    public void Backspace(CallbackContext state)
+    {
+        if (currentPuzzleObject == null) return;
+        if (state.performed)
+        {
+            if (currentPuzzleObject.TryGetComponent<KeypadPuzzle>(out KeypadPuzzle keypadPuzzle))
+            {
+                keypadPuzzle.OnClearPressed();
+            }
+        }
+    }
+
+    public void Enter(CallbackContext state)
+    {
+        if (currentPuzzleObject == null) return;
+        if (state.performed)
+        {
+            if (currentPuzzleObject.TryGetComponent<KeypadPuzzle>(out KeypadPuzzle keypadPuzzle))
+            {
+                keypadPuzzle.Enter();
+            }
         }
     }
 }
