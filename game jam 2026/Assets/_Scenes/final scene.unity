@@ -248,44 +248,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!1 &449309990 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4329057690906640443, guid: dcf3680a6abe4e04c8cbc42d459ffebf, type: 3}
-  m_PrefabInstance: {fileID: 1694320955}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &449309998
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 449309990}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ad72078be703148a3d008ac59534eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TriggerUnityEvent
-  executeOnEnter:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 901513796}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  executeOnExit:
-    m_PersistentCalls:
-      m_Calls: []
-  triggerTag: Player
-  triggerEnterOnlyOnce: 1
-  triggerExitOnlyOnce: 0
 --- !u!1 &552556749
 GameObject:
   m_ObjectHideFlags: 0
@@ -690,12 +652,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 901513794}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.8, y: -1.63, z: -1.19}
+  m_LocalRotation: {x: -0, y: -0.70710576, z: -0, w: 0.70710784}
+  m_LocalPosition: {x: 0.536, y: 1.1, z: -0.341}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1675021684}
+  m_Father: {fileID: 1327814687}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &901513796
 AudioSource:
@@ -719,7 +681,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -754,7 +716,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1034,6 +996,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1343390763}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!4 &1327814687 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9061983662832031410, guid: dcf3680a6abe4e04c8cbc42d459ffebf, type: 3}
+  m_PrefabInstance: {fileID: 1694320955}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1343390762
 GameObject:
   m_ObjectHideFlags: 0
@@ -1395,7 +1362,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 901513795}
   - {fileID: 432450604}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1496,17 +1462,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7494482301505669382, guid: dcf3680a6abe4e04c8cbc42d459ffebf, type: 3}
+      propertyPath: doorSound
+      value: 
+      objectReference: {fileID: 901513796}
     - target: {fileID: 7707900824511152906, guid: dcf3680a6abe4e04c8cbc42d459ffebf, type: 3}
       propertyPath: m_Name
       value: 'room '
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1369526971114403148, guid: dcf3680a6abe4e04c8cbc42d459ffebf, type: 3}
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4329057690906640443, guid: dcf3680a6abe4e04c8cbc42d459ffebf, type: 3}
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 9061983662832031410, guid: dcf3680a6abe4e04c8cbc42d459ffebf, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 449309998}
+      addedObject: {fileID: 901513795}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dcf3680a6abe4e04c8cbc42d459ffebf, type: 3}
 --- !u!1 &1779203000
 GameObject:

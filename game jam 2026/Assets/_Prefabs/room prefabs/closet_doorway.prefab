@@ -149,8 +149,8 @@ GameObject:
   - component: {fileID: 8647718457934558691}
   - component: {fileID: 2114136052997494445}
   m_Layer: 0
-  m_Name: closet_door
-  m_TagString: Untagged
+  m_Name: Closet Door
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
