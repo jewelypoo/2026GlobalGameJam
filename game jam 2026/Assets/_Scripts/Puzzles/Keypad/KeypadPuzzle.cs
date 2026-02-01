@@ -11,7 +11,7 @@ public class KeypadPuzzle : BasePuzzleObject
     [SerializeField] TMP_Text displayText;
     [SerializeField] private AudioSource beepSound, correctSound, errorSound;
     
-    private string code = "1414", input;
+    private string code = "9701", input;
 
     private bool debounce = false;
     private int keysPressed = 0;
